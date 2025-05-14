@@ -5,3 +5,10 @@ AMQP (Advanced Message Queuing Protocol) is just a set of rules that lets differ
 - **first `guest`**: the username we log in with  
 - **second `guest`**: the password for that user  
 - **`localhost:5672`**: the address (our own computer) and port (5672 is RabbitMQ’s default) where the broker is running  
+
+## Simulation slow subscribe
+
+![alt text](img/image.png)
+
+The peak of “Total” hits 16 because the publisher sent messages faster than the subscriber could acknowledge them. Each time we ran the publisher it pushed another batch onto the queue, and because the consumer processes messages one by one, a backlog built up. The peak of 16 is just the highest number of unacknowledged messages waiting in the queue before the subscriber finally caught up and drove the count back down to zero.
+
