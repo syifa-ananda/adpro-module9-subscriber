@@ -12,3 +12,10 @@ AMQP (Advanced Message Queuing Protocol) is just a set of rules that lets differ
 
 The peak of “Total” hits 16 because the publisher sent messages faster than the subscriber could acknowledge them. Each time we ran the publisher it pushed another batch onto the queue, and because the consumer processes messages one by one, a backlog built up. The peak of 16 is just the highest number of unacknowledged messages waiting in the queue before the subscriber finally caught up and drove the count back down to zero.
 
+## Reflection and Running at least three subscribers
+
+![alt text](img/image2.png)
+
+The queue hit a high of 8 messages before dropping back to zero. That spike occurred because the publisher released a batch of messages faster than one consumer could handle but with 3 subscribers running at once, they split the work and cleared the backlog almost immediately. This shows how adding consumers boosts throughput and prevents queues from piling up when publishers push quickly.
+
+
